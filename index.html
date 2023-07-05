@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <title>Widget</title>
+</head>
+
+<body>
+  <section class="container mt-4" style="max-width: 670px;background-color: #fafbfd;border-radius: 10px;"
+    id="contenedor-formulario">
+    <H2>Informacion Personal</H2>
+    <div>
+      <div class="col-md-4" style="width: 683px;scale: auto;">
+        <style>
+          .label-input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+          }
+
+          .label-input-group label {
+            margin-right: 5px;
+          }
+
+          .label-select-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+          }
+
+          .label-select-group label {
+            margin-right: 5px;
+          }
+
+          .row.equal-height {
+            display: flex;
+            align-items: stretch;
+          }
+        </style>
+
+        <style>
+          .row.equal-height {
+            display: flex;
+            align-items: center;
+          }
+
+          .col {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+          }
+
+          .label-input-group {
+            display: flex;
+            align-items: center;
+          }
+
+          .label-input-group .form-label {
+            margin-right: 5px;
+          }
+
+          .label-input-group .form-control {
+            width: 100%;
+          }
+        </style>
+        <div class="row g-8 equal-height">
+          <div class="row g-8">
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="nombre">Nombre</label>
+                <input type="text" id="nombre" style="margin-left: 20px;width: 212.55px;"
+                  class="form-control form-control-sm" name="nombre">
+              </div>
+            </div>
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="email">Correo Electrónico</label>
+                <input type="text" id="email" style="margin-left: 18px" class="form-control form-control-sm"
+                  name="email">
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-8 equal-height">
+          <div class="row g-8">
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="apellido">Apellido</label>
+                <input type="text" id="apellido" style="margin-left: 20px;width: 212.55px;"
+                  class="form-control form-control-sm" name="apellido">
+              </div>
+
+
+            </div>
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="codul">Código Ulima</label>
+                <input type="number" id="codul" style="margin-left: 10px;width: 212.55px;"
+                  class="form-control form-control-sm" name="codul">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row g-8">
+          <div class="row g-8">
+            <div class="col">
+
+              <div class="label-input-group">
+                <label class="form-label" for="fav">Nombre Favorito</label>
+                <input type="text" id="fav" class="form-control form-control-sm" name="fav">
+              </div>
+            </div>
+            <div class="col">
+              <div class="label-select-group">
+                <label class="form-label" for="doc">TipoDoc</label>
+                <select id="doc" name="doc" style="margin-left: 38px;width: 212.55px;"
+                  class="form-select form-select-sm">
+                  <option value="">Opciones</option>
+                  <option>DNI</option>
+                  <option>Pasaporte</option>
+                  <option>CE</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row g-8">
+          <div class="row g-8">
+            <div class="col">
+              <div class="label-select-group">
+                <label class="form-label" for="departamento">Departamento</label>
+                <select id="departamento" style="margin-left: 10px;width: 180px;" name="departamento"
+                  class="form-select form-select-sm">
+                  <option value="">Opciones</option>
+                </select>
+              </div>
+
+            </div>
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="dni">Documento</label>
+                <input type="text" id="dni" style="margin-left: 18px;width: 212.55px;"
+                  class="form-control form-control-sm" name="dni"><br>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-8">
+          <div class="row g-8">
+            <div class="col">
+              <div class="label-select-group">
+                <label class="form-label" for="provincia">Provincia</label>
+                <select id="provincia" style="margin-left: 5px;width: 212.55px;" name="provincia"
+                  class="form-select form-select-sm">
+                  <option value="">Opciones</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="codps">CódigoPS</label>
+                <input type="number" id="codps" style="margin-left: 30px;width: 212.55px;"
+                  class="form-control form-control-sm" name="codps"><br>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row g-8">
+          <div class="row g-8">
+            <div class="col">
+              <div class="label-select-group">
+                <label class="form-label" for="distrito">Distrito</label>
+                <select id="distrito" style="margin-left: 15px;width: 212.55px;" name="distrito"
+                  class="form-select form-select-sm">
+                  <option value="">Opciones</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="genero">Género</label>
+                <select id="genero" name="genero" style="margin-left: 40px;width: 212.55px;"
+                  class="form-select form-select-sm">
+                  <option value="">Opciones</option>
+                  <option>Masculino</option>
+                  <option>Femenino</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row g-8">
+          <div class="row g-8">
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="domicilio">Domicilio</label>
+                <input type="text" id="domicilio" style="margin-left: 5px;width: 212.55px;"
+                  class="form-control form-control-sm" name="domicilio"><br>
+              </div>
+            </div>
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="date">Fecha de Nacimiento</label>
+                <input type="date" id="date" style="margin-left: 10px;width: 165px;"
+                  class="form-control form-control-sm" name="date">
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-8">
+          <div class="row g-8">
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="sl">Situación Laboral</label>
+                <select id="sl" name="sl" style="margin-left: 5px;width: 170px;" class="form-select form-select-sm">
+                  <option value="">Opciones</option>
+                  <option>Dependiente</option>
+                  <option>Independiente</option>
+                  <option>Jubilado</option>
+                  <option>Transición laboral</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="label-input-group">
+                <label class="form-label" for="lugarNacimiento">Lugar de Nacimiento</label>
+                <input type="text" id="lugarNacimiento" class="form-control form-control-sm" name="lugarNacimiento">
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+        
+        <script src="/script.js">
+          function obtenerNombrePorID(id) {
+            const departamentoCode = Object.keys(jsonData).find(key => key === id.substring(0, 2));
+            if (!departamentoCode) {
+              return null;
+            }
+
+            const provinciaCode = Object.keys(jsonData[departamentoCode].PROVINCIAS).find(key => key === id.substring(2, 4));
+            if (!provinciaCode) {
+              return null;
+            }
+
+            const distritoCode = Object.keys(jsonData[departamentoCode].PROVINCIAS[provinciaCode].DISTRITOS).find(key => key === id.substring(4));
+            if (!distritoCode) {
+              return null;
+            }
+
+            const departamento = jsonData[departamentoCode].DEPARTAMENTO;
+            const provincia = jsonData[departamentoCode].PROVINCIAS[provinciaCode].PROVINCIA;
+            const distrito = jsonData[departamentoCode].PROVINCIAS[provinciaCode].DISTRITOS[distritoCode];
+
+
+
+            return {
+              departamento,
+              provincia,
+              distrito
+            };
+          }
+
+          const id = "010101";
+          const nombres = obtenerNombrePorID(id);
+        </script>
+        <script>
+
+        </script>
+        <!-- SCRIPT PARA LOS CHECKLIST DE DEP-PROV-DIST -->
+        <script>
+
+          const departamentoSelect = document.getElementById('departamento');
+          const provinciaSelect = document.getElementById('provincia');
+          const distritoSelect = document.getElementById('distrito');
+
+          const limaOption = document.createElement('option');
+          limaOption.value = '14';
+          limaOption.textContent = data['14'].DEPARTAMENTO;
+          departamentoSelect.appendChild(limaOption);
+
+          for (let codigoDepartamento in data) {
+            if (codigoDepartamento !== '14') {
+              const option = document.createElement('option');
+              option.value = codigoDepartamento;
+              option.textContent = data[codigoDepartamento].DEPARTAMENTO;
+              departamentoSelect.appendChild(option);
+            }
+          }
+          // Llenar el select de departamentos
+          for (let codigoDepartamento in data) {
+            const option = document.createElement('option');
+            option.value = codigoDepartamento;
+            option.textContent = data[codigoDepartamento].DEPARTAMENTO;
+            departamentoSelect.appendChild(option);
+          }
+
+          // Función para mostrar las provincias del departamento seleccionado
+          function mostrarProvincias() {
+            const codigoDepartamentoSeleccionado = departamentoSelect.value;
+            provinciaSelect.innerHTML = '<option value="">Opciones</option>'; // Limpiar opciones anteriores
+            distritoSelect.innerHTML = '<option value="">Opciones</option>'; // Limpiar opciones anteriores
+
+            if (codigoDepartamentoSeleccionado !== '') {
+              const provincias = data[codigoDepartamentoSeleccionado].PROVINCIAS;
+
+              for (let codigoProvincia in provincias) {
+                const option = document.createElement('option');
+                option.value = codigoProvincia;
+                option.textContent = provincias[codigoProvincia].PROVINCIA;
+                provinciaSelect.appendChild(option);
+              }
+            }
+          }
+
+          // Función para mostrar los distritos de la provincia seleccionada
+          function mostrarDistritos() {
+            const codigoDepartamentoSeleccionado = departamentoSelect.value;
+            const codigoProvinciaSeleccionada = provinciaSelect.value;
+            distritoSelect.innerHTML = '<option value="">Opciones</option>'; // Limpiar opciones anteriores
+
+            if (codigoDepartamentoSeleccionado !== '' && codigoProvinciaSeleccionada !== '') {
+              const distritos = data[codigoDepartamentoSeleccionado].PROVINCIAS[codigoProvinciaSeleccionada].DISTRITOS;
+
+              for (let codigoDistrito in distritos) {
+                const option = document.createElement('option');
+                option.value = codigoDistrito;
+                option.textContent = distritos[codigoDistrito];
+                distritoSelect.appendChild(option);
+              }
+            }
+          }
+
+          departamentoSelect.addEventListener('change', mostrarProvincias);
+          provinciaSelect.addEventListener('change', mostrarDistritos);
+        </script>
+
+        <div class="mb-3">
+          <button onclick="UpdateRecord()" type="submit"
+            style="background-color: #0279FF;color: white;border-radius: 10px;font-family: 'Open Sans', sans-serif;width: 220px;margin-left: 200PX;"
+            class="refresh-button btn btn  fs-8 ">
+            Actualizar registro
+            <script>
+
+
+
+              function UpdateRecord() {
+                const url = "http://localhost:4444/api/zoho/update";
+
+
+
+                // Obtener los valores de los campos del formulario
+                const id = "3922751000446333398"; // ID de referencia
+                const nombreInput = document.getElementById('nombre').value;
+                const apellidoInput = document.getElementById('apellido').value;
+                const emailInput = document.getElementById('email').value;
+                const codulInput = document.getElementById('codul').value;
+                const favInput = document.getElementById('fav').value;
+                const doc = document.getElementById("doc").value;
+                const departamento = document.getElementById("departamento").value;
+
+                const provincia = document.getElementById("provincia").value;
+                const distrito = document.getElementById("distrito").value;
+                const dni = document.getElementById("dni").value;
+                const codps = document.getElementById("codps").value;
+                const genero = document.getElementById("genero").value;
+                const domicilio = document.getElementById("domicilio").value;
+                const date = document.getElementById("date").value;
+                const sl = document.getElementById("sl").value;
+                const lugarNacimiento = document.getElementById("lugarNacimiento").value;
+
+                //
+                const departamentoTEXT = data[departamento]["DEPARTAMENTO"];
+                const provinciaTEXT = data[departamento]["PROVINCIAS"][provincia]["PROVINCIA"];
+                const distritoTEXT = data[departamento]["PROVINCIAS"][provincia]["DISTRITOS"][distrito];
+
+                //TRAER HORA
+                const fechaHora = new Date();
+                const hora = fechaHora.toLocaleTimeString('es-ES', { hour12: false });
+
+                const requestBody = {
+                  data: [
+                    {
+                      id: id, // ID de referencia
+                      First_Name: nombreInput,
+                      Last_Name: apellidoInput,
+                      Email: emailInput,
+                      UL_CODIGO: codulInput,
+                      Nombre_favorito: favInput,
+                      Tipo_documento: doc,
+                      Department: departamentoTEXT,
+                      Provincia: provinciaTEXT,
+                      Distrito: distritoTEXT,
+                      UL_DNI: dni,
+                      UL_CO_ID_PS: codps,
+                      G_nero: genero,
+                      Domicilio: domicilio,
+                      Date_of_Birth: date,
+                      Situaci_n_Laboral: sl,
+                      Lugar_de_nacimiento: lugarNacimiento,
+                      Ubigeo: distrito,
+                      Fecha_hora: hora,
+                    }
+                  ]
+                };
+
+                fetch(url, {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(requestBody)
+                })
+                  .then(response => {
+                    if (!response.ok) {
+                      throw new Error("Error en la solicitud");
+                    }
+                    return response.json();
+                  })
+                  .then(data => {
+                    console.log(data);
+                    // Realizar cualquier operación adicional con la respuesta de la actualización
+                    location.reload(); // Recargar la página después de la actualización
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+              }
+            </script>
+          </button>
+          <script>
+            let url = "http://localhost:4444/api/zoho/test";
+
+            fetch(url)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error("Error en la solicitud");
+                }
+                return response.json();
+              })
+              .then(data => {
+                console.log(data); // Verificar la estructura de los datos en la consola
+
+                const nombreInput = document.getElementById('nombre');
+                const emailInput = document.getElementById('email');
+                const apellidoInput = document.getElementById('apellido');
+                const codulInput = document.getElementById('codul');
+                const favInput = document.getElementById('fav');
+                const doc = document.getElementById("doc")
+                const departamento = document.getElementById("departamento")
+                const provincia = document.getElementById("provincia")
+                const distrito = document.getElementById("distrito")
+                const dni = document.getElementById("dni")
+                const codps = document.getElementById("codps")
+                const genero = document.getElementById("genero")
+                const domicilio = document.getElementById("domicilio")
+                const date = document.getElementById("date")
+                const sl = document.getElementById("sl")
+                const lugarNacimiento = document.getElementById("lugarNacimiento")
+
+                const firstData = data.data[0]; // Obtener el primer elemento del arreglo
+
+                nombreInput.value = firstData.First_Name || '';
+                emailInput.value = firstData.Email || '';
+                apellidoInput.value = firstData.Last_Name;
+                codulInput.value = firstData.UL_CODIGO || '';
+                favInput.value = firstData.Nombre_favorito || '';
+                doc.value = firstData.Tipo_documento || '';
+                departamento.value = firstData.Department;
+                provincia.value = firstData.Provincia;
+                distrito.value = firstData.Distrito;
+                dni.value = firstData.UL_DNI || '';
+                codps.value = firstData.UL_CO_ID_PS;
+                genero.value = firstData.G_nero;
+                domicilio.value = firstData.Domicilio;
+                date.value = firstData.Date_of_Birth;
+                sl.value = firstData.Situaci_n_Laboral;
+                lugarNacimiento.value = firstData.Lugar_de_nacimiento;
+
+              })
+              .catch(error => console.log(error));
+          </script>
+
+        </div>
+      </div>
+  </section>
+
+</body>
+
+</html>
