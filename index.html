@@ -144,7 +144,7 @@
                   class="form-select form-select-sm">
                   <option value="">Opciones</option>
                 </select>
-                
+
               </div>
 
             </div>
@@ -164,9 +164,9 @@
             <div class="col">
               <div class="label-select-group">
                 <label class="form-label" for="dep">Departamento </label>
-                <input type="text" id="dep" style="margin-left: 15px;"
-                  class="form-control form-control-sm" disabled name="dep"><br>
-               
+                <input type="text" id="dep" style="margin-left: 15px;" class="form-control form-control-sm" disabled
+                  name="dep"><br>
+
               </div>
             </div>
             <div class="col">
@@ -191,8 +191,8 @@
                   class="form-select form-select-sm">
                   <option value="">Opciones</option>
                 </select>
-                
-                  
+
+
               </div>
             </div>
             <div class="col">
@@ -225,7 +225,7 @@
                 <label class="form-label" for="domicilio">Domicilio</label>
                 <input type="text" id="domicilio" style="margin-left: 28px;width: 212.55px;"
                   class="form-control form-control-sm" name="domicilio"><br>
-                
+
               </div>
 
             </div>
@@ -266,8 +266,8 @@
             </div>
             <div class="col">
               <div class="label-input-group">
-                  <label class="form-label" for="lugarNacimiento">Lugar de Nacimiento</label>
-                  <input type="text" id="lugarNacimiento" class="form-control form-control-sm" name="lugarNacimiento">
+                <label class="form-label" for="lugarNacimiento">Lugar de Nacimiento</label>
+                <input type="text" id="lugarNacimiento" class="form-control form-control-sm" name="lugarNacimiento">
               </div>
 
 
@@ -275,7 +275,11 @@
             </div>
           </div>
         </div>
-        
+        <form id="idForm" style="margin-bottom: 50px" >
+          <label for="idInput" >ID:</label>
+          <input type="text" id="idInput" name="id" disabled>
+        </form>
+
         <script src="/script.js">
           function obtenerNombrePorID(id) {
             const departamentoCode = Object.keys(jsonData).find(key => key === id.substring(0, 2));
@@ -317,12 +321,12 @@
           const departamentoSelect = document.getElementById('departamento');
           const provinciaSelect = document.getElementById('provincia');
           const distritoSelect = document.getElementById('distrito');
-        
+
           const limaOption = document.createElement('option');
           limaOption.value = '14';
           limaOption.textContent = data['14'].DEPARTAMENTO;
           departamentoSelect.appendChild(limaOption);
-        
+
           for (let codigoDepartamento in data) {
             if (codigoDepartamento !== '14') {
               const option = document.createElement('option');
@@ -331,7 +335,7 @@
               departamentoSelect.appendChild(option);
             }
           }
-        
+
           // Llenar el select de departamentos
           for (let codigoDepartamento in data) {
             const option = document.createElement('option');
@@ -339,16 +343,16 @@
             option.textContent = data[codigoDepartamento].DEPARTAMENTO;
             departamentoSelect.appendChild(option);
           }
-        
+
           // Función para mostrar las provincias del departamento seleccionado
           function mostrarProvincias() {
             const codigoDepartamentoSeleccionado = departamentoSelect.value;
             provinciaSelect.innerHTML = '<option value="">Opciones</option>'; // Limpiar opciones anteriores
             distritoSelect.innerHTML = '<option value="">Opciones</option>'; // Limpiar opciones anteriores
-        
+
             if (codigoDepartamentoSeleccionado !== '') {
               const provincias = data[codigoDepartamentoSeleccionado].PROVINCIAS;
-        
+
               for (let codigoProvincia in provincias) {
                 const option = document.createElement('option');
                 option.value = codigoProvincia;
@@ -357,16 +361,16 @@
               }
             }
           }
-        
+
           // Función para mostrar los distritos de la provincia seleccionada
           function mostrarDistritos() {
             const codigoDepartamentoSeleccionado = departamentoSelect.value;
             const codigoProvinciaSeleccionada = provinciaSelect.value;
             distritoSelect.innerHTML = '<option value="">Opciones</option>'; // Limpiar opciones anteriores
-        
+
             if (codigoDepartamentoSeleccionado !== '' && codigoProvinciaSeleccionada !== '') {
               const distritos = data[codigoDepartamentoSeleccionado].PROVINCIAS[codigoProvinciaSeleccionada].DISTRITOS;
-        
+
               for (let codigoDistrito in distritos) {
                 const option = document.createElement('option');
                 option.value = codigoDistrito;
@@ -375,83 +379,97 @@
               }
             }
           }
-        
+
           // Desactivar funciones de mostrar departamento, provincia y distrito
           function desactivarMostrarDatos() {
             departamentoSelect.removeEventListener('change', mostrarProvincias);
             provinciaSelect.removeEventListener('change', mostrarDistritos);
           }
-        
+
           // Activar funciones de mostrar departamento, provincia y distrito
           function activarMostrarDatos() {
             departamentoSelect.addEventListener('change', mostrarProvincias);
             provinciaSelect.addEventListener('change', mostrarDistritos);
           }
-        
-          let url = "http://localhost:4444/api/zoho/test";
-        
-          fetch(url)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error("Error en la solicitud");
-              }
-              return response.json();
-            })
-            .then(data => {
-              const nombreInput = document.getElementById('nombre');
-              const emailInput = document.getElementById('email');
-              const apellidoInput = document.getElementById('apellido');
-              const codulInput = document.getElementById('codul');
-              const favInput = document.getElementById('fav');
-              const doc = document.getElementById("doc")
-              const departamento = document.getElementById("departamento")
-              const provincia = document.getElementById("provincia")
-              const distrito = document.getElementById("distrito")
-              const dni = document.getElementById("dni")
-              const codps = document.getElementById("codps")
-              const genero = document.getElementById("genero")
-              const domicilio = document.getElementById("domicilio")
-              const date = document.getElementById("date")
-              // const sl = document.getElementById("sl")
-              const lugarNacimiento = document.getElementById("lugarNacimiento")
-              const dep = document.getElementById("dep")
-              const prov = document.getElementById("prov")
-              const dist = document.getElementById("dist")
-        
-              const firstData = data.data[0]; // Obtener el primer elemento del arreglo
-        
-              nombreInput.value = firstData.First_Name || '';
-              emailInput.value = firstData.Email || '';
-              apellidoInput.value = firstData.Last_Name;
-              codulInput.value = firstData.UL_CODIGO || '';
-              favInput.value = firstData.Nombre_favorito || '';
-              doc.value = firstData.Tipo_documento || '';
-              dep.value = firstData.Department || '';
-              prov.value = firstData.Provincia || '';
-              dist.value = firstData.Distrito || '';
-              dni.value = firstData.UL_DNI || '';
-              codps.value = firstData.UL_CO_ID_PS;
-              genero.value = firstData.G_nero;
-              domicilio.value = firstData.Domicilio;
-              date.value = firstData.Date_of_Birth;
-              // sl.value = firstData.Situaci_n_Laboral;
-              lugarNacimiento.value = firstData.Lugar_de_nacimiento;
-              console.log(data,departamento.value)
-              desactivarMostrarDatos();
-            })
-            .catch(error => console.log(error));
-        
+          const moduleName = "Contacts"; // Módulo específico, puedes cambiarlo según tus necesidades
+          correo = document.getElementById('email').value;
+          const email = correo; // Correo electrónico del registro a buscar
+
+
+          function fetchDataWithQuery() {
+            const id = document.getElementById('idInput').value;
+            const url = `https://serene-tundra-47257-a3e93549724c.herokuapp.com/api/zoho/test?id=${id}`;
+
+            fetch(url)
+              .then(response => {
+                if (!response.ok) {
+                  throw new Error("Error en la solicitud");
+                }
+                return response.json();
+              })
+              .then(data => {
+                const nombreInput = document.getElementById('nombre');
+                const emailInput = document.getElementById('email');
+                const apellidoInput = document.getElementById('apellido');
+                const codulInput = document.getElementById('codul');
+                const favInput = document.getElementById('fav');
+                const doc = document.getElementById("doc");
+                const departamento = document.getElementById("departamento");
+                const provincia = document.getElementById("provincia");
+                const distrito = document.getElementById("distrito");
+                const dni = document.getElementById("dni");
+                const codps = document.getElementById("codps");
+                const genero = document.getElementById("genero");
+                const domicilio = document.getElementById("domicilio");
+                const date = document.getElementById("date");
+                const lugarNacimiento = document.getElementById("lugarNacimiento");
+                const dep = document.getElementById("dep");
+                const prov = document.getElementById("prov");
+                const dist = document.getElementById("dist");
+
+                const firstData = data.data[0]; // Obtener el primer elemento del arreglo
+
+                nombreInput.value = firstData.First_Name || '';
+                emailInput.value = firstData.Email || '';
+                apellidoInput.value = firstData.Last_Name || '';
+                codulInput.value = firstData.UL_CODIGO || '';
+                favInput.value = firstData.Nombre_favorito || '';
+                doc.value = firstData.Tipo_documento || '';
+                dep.value = firstData.Department || '';
+                prov.value = firstData.Provincia || '';
+                dist.value = firstData.Distrito || '';
+                dni.value = firstData.UL_DNI || '';
+                codps.value = firstData.UL_CO_ID_PS || '';
+                genero.value = firstData.G_nero || '';
+                domicilio.value = firstData.Domicilio || '';
+                date.value = firstData.Date_of_Birth || '';
+                lugarNacimiento.value = firstData.Lugar_de_nacimiento || '';
+
+                desactivarMostrarDatos();
+              })
+
+
+              .catch(error => console.log(error));
+          }
+          const urlParams = new URLSearchParams(window.location.search);
+          const idFromURL = urlParams.get('id');
+
+          // Asignar el ID a la entrada de texto
+          document.getElementById('idInput').value = idFromURL;
+
+          // Ejecutar fetchDataWithQuery al cargar la página con el ID de la URL
+          fetchDataWithQuery();
           // Volver a activar funciones de mostrar departamento, provincia y distrito al realizar cambios
           departamentoSelect.addEventListener('change', () => {
             activarMostrarDatos();
             mostrarProvincias();
           });
-        
+
           provinciaSelect.addEventListener('change', () => {
             activarMostrarDatos();
             mostrarDistritos();
           });
-        
+
           distritoSelect.addEventListener('change', () => {
             activarMostrarDatos();
           });
