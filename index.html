@@ -142,7 +142,6 @@
                 <label class="form-label" for="departamento">Seleccionar <br>Departamento</label>
                 <select id="departamento" style="margin-left: 10px;width: 180px;" name="departamento"
                   class="form-select form-select-sm">
-                  <option value="">Opciones</option>
                 </select>
 
               </div>
@@ -275,77 +274,61 @@
             </div>
           </div>
         </div>
-        <form id="idForm" style="margin-bottom: 50px" >
-          <label for="idInput" >ID:</label>
+        <form id="idForm" style="margin-bottom: 50px">
+          <label for="idInput">ID:</label>
           <input type="text" id="idInput" name="id" disabled>
         </form>
 
         <script src="/script.js">
-          function obtenerNombrePorID(id) {
-            const departamentoCode = Object.keys(jsonData).find(key => key === id.substring(0, 2));
-            if (!departamentoCode) {
-              return null;
-            }
-
-            const provinciaCode = Object.keys(jsonData[departamentoCode].PROVINCIAS).find(key => key === id.substring(2, 4));
-            if (!provinciaCode) {
-              return null;
-            }
-
-            const distritoCode = Object.keys(jsonData[departamentoCode].PROVINCIAS[provinciaCode].DISTRITOS).find(key => key === id.substring(4));
-            if (!distritoCode) {
-              return null;
-            }
-
-            const departamento = jsonData[departamentoCode].DEPARTAMENTO;
-            const provincia = jsonData[departamentoCode].PROVINCIAS[provinciaCode].PROVINCIA;
-            const distrito = jsonData[departamentoCode].PROVINCIAS[provinciaCode].DISTRITOS[distritoCode];
-
-
-
-            return {
-              departamento,
-              provincia,
-              distrito
-            };
-          }
-
-          const id = "010101";
-          const nombres = obtenerNombrePorID(id);
         </script>
         <script>
+          //jsonData =  data,
+          // function obtenerNombrePorID(id) {
+          //   const departamentoCode = Object.keys(jsonData).find(key => key === id.substring(0, 2));
+          //   if (!departamentoCode) {
+          //     return null;
+          //   }
+          //   console.log(departamentoCode);
 
-        </script>
-        <!-- SCRIPT PARA LOS CHECKLIST DE DEP-PROV-DIST -->
-        <script>
-          const departamentoSelect = document.getElementById('departamento');
-          const provinciaSelect = document.getElementById('provincia');
-          const distritoSelect = document.getElementById('distrito');
+          //   const provinciaCode = Object.keys(jsonData[departamentoCode].PROVINCIAS).find(key => key === id.substring(2, 4));
+          //   if (!provinciaCode) {
+          //     return null;
+          //   }
 
-          const limaOption = document.createElement('option');
-          limaOption.value = '14';
-          limaOption.textContent = data['14'].DEPARTAMENTO;
-          departamentoSelect.appendChild(limaOption);
+          //   const distritoCode = Object.keys(jsonData[departamentoCode].PROVINCIAS[provinciaCode].DISTRITOS).find(key => key === id.substring(4));
+          //   if (!distritoCode) {
+          //     return null;
+          //   }
 
-          for (let codigoDepartamento in data) {
-            if (codigoDepartamento !== '14') {
-              const option = document.createElement('option');
-              option.value = codigoDepartamento;
-              option.textContent = data[codigoDepartamento].DEPARTAMENTO;
-              departamentoSelect.appendChild(option);
+          //   // const departamento = jsonData[departamentoCode].DEPARTAMENTO;
+          //   // const provincia = jsonData[departamentoCode].PROVINCIAS[provinciaCode].PROVINCIA;
+          //   const distrito = jsonData[departamentoCode].PROVINCIAS[provinciaCode].DISTRITOS[distritoCode];
+
+
+
+          //   return {
+          //     departamento,
+          //     provincia,
+          //     distrito
+          //   };
+          // }
+
+          let departamentoSelect = document.getElementById('departamento');
+          let provinciaSelect = document.getElementById('provincia');
+          let distritoSelect = document.getElementById('distrito');
+
+          function obtenerIDPorNombre(name) {
+            const departamentoName = Object.keys(data).find(key => data[key].DEPARTAMENTO === name);
+            if (!departamentoName) {
+              return null;
             }
+            const depa = data[departamentoName].DEPARTAMENTO;
+            return departamentoName;
+
           }
 
-          // Llenar el select de departamentos
-          for (let codigoDepartamento in data) {
-            const option = document.createElement('option');
-            option.value = codigoDepartamento;
-            option.textContent = data[codigoDepartamento].DEPARTAMENTO;
-            departamentoSelect.appendChild(option);
-          }
-
-          // Función para mostrar las provincias del departamento seleccionado
-          function mostrarProvincias() {
+           // Función para mostrar las provincias del departamento seleccionado
+           function mostrarProvincias() {
             const codigoDepartamentoSeleccionado = departamentoSelect.value;
             provinciaSelect.innerHTML = '<option value="">Opciones</option>'; // Limpiar opciones anteriores
             distritoSelect.innerHTML = '<option value="">Opciones</option>'; // Limpiar opciones anteriores
@@ -380,6 +363,7 @@
             }
           }
 
+
           // Desactivar funciones de mostrar departamento, provincia y distrito
           function desactivarMostrarDatos() {
             departamentoSelect.removeEventListener('change', mostrarProvincias);
@@ -391,10 +375,6 @@
             departamentoSelect.addEventListener('change', mostrarProvincias);
             provinciaSelect.addEventListener('change', mostrarDistritos);
           }
-          const moduleName = "Contacts"; // Módulo específico, puedes cambiarlo según tus necesidades
-          correo = document.getElementById('email').value;
-          const email = correo; // Correo electrónico del registro a buscar
-
 
           function fetchDataWithQuery() {
             const id = document.getElementById('idInput').value;
@@ -445,34 +425,125 @@
                 date.value = firstData.Date_of_Birth || '';
                 lugarNacimiento.value = firstData.Lugar_de_nacimiento || '';
 
+                const DepaID = obtenerIDPorNombre(dep.value);
+                let DepaLista = [DepaID, dep.value];
+
                 desactivarMostrarDatos();
+                
+                return DepaLista;
+              }).then(DepaLista => {
+                
+                departamentoSelect = document.getElementById('departamento');
+                provinciaSelect = document.getElementById('provincia');
+                distritoSelect = document.getElementById('distrito');
+
+                const yoyi = document.createElement('option');
+                yoyi.value = DepaLista[0];
+                yoyi.textContent = DepaLista[1];
+                departamentoSelect.appendChild(yoyi);
+
+                for (let codigoDepartamento in data) {
+                  if (codigoDepartamento !== DepaLista[0]) {
+                    const option = document.createElement('option');
+                    option.value = codigoDepartamento;
+                    option.textContent = data[codigoDepartamento].DEPARTAMENTO;
+                    departamentoSelect.appendChild(option);
+                  }
+                }
+
+                // Volver a activar funciones de mostrar departamento, provincia y distrito al realizar cambios
+                departamentoSelect.addEventListener('change', () => {
+                  activarMostrarDatos();
+                  mostrarProvincias();
+                });
+
+                provinciaSelect.addEventListener('change', () => {
+                  activarMostrarDatos();
+                  mostrarDistritos();
+                });
+
+                distritoSelect.addEventListener('change', () => {
+                  activarMostrarDatos();
+                });
               })
 
-
-              .catch(error => console.log(error));
+              .catch (error => console.log(error));
           }
+
           const urlParams = new URLSearchParams(window.location.search);
           const idFromURL = urlParams.get('id');
-
           // Asignar el ID a la entrada de texto
           document.getElementById('idInput').value = idFromURL;
 
           // Ejecutar fetchDataWithQuery al cargar la página con el ID de la URL
           fetchDataWithQuery();
+          // console.log(DepaID);
+
+          // const departamentoSelect = document.getElementById('departamento');
+          // const provinciaSelect = document.getElementById('provincia');
+          // const distritoSelect = document.getElementById('distrito');
+
+          // const yoyi = document.createElement('option');
+          // yoyi.value = DepaID[0];
+          // yoyi.textContent = DepaID[1];
+          // // departamentoSelect.appendChild(yoyi);
+
+          // for (let codigoDepartamento in data) {
+          //   if (codigoDepartamento !== DepaID) {
+          //     const option = document.createElement('option');
+          //     option.value = codigoDepartamento;
+          //     option.textContent = data[codigoDepartamento].DEPARTAMENTO;
+          //     departamentoSelect.appendChild(option);
+          //   }
+          // }
+
+          // // Volver a activar funciones de mostrar departamento, provincia y distrito al realizar cambios
+          // departamentoSelect.addEventListener('change', () => {
+          //   activarMostrarDatos();
+          //   mostrarProvincias();
+          // });
+
+          // provinciaSelect.addEventListener('change', () => {
+          //   activarMostrarDatos();
+          //   mostrarDistritos();
+          // });
+
+          // distritoSelect.addEventListener('change', () => {
+          //   activarMostrarDatos();
+          // });
+
+          // // Llenar el select de departamentos
+          // for (let codigoDepartamento in data) {
+          //   const option = document.createElement('option');
+          //   option.value = codigoDepartamento;
+          //   option.textContent = data[codigoDepartamento].DEPARTAMENTO;
+          //   departamentoSelect.appendChild(option);
+          // }
+
+         
+
+          // const urlParams = new URLSearchParams(window.location.search);
+
+          // const idFromURL = urlParams.get('id');
+          // // Asignar el ID a la entrada de texto
+          // document.getElementById('idInput').value = idFromURL;
+
+          // Ejecutar fetchDataWithQuery al cargar la página con el ID de la URL
+          //fetchDataWithQuery();
           // Volver a activar funciones de mostrar departamento, provincia y distrito al realizar cambios
-          departamentoSelect.addEventListener('change', () => {
-            activarMostrarDatos();
-            mostrarProvincias();
-          });
+          //departamentoSelect.addEventListener('change', () => {
+            //activarMostrarDatos();
+            //mostrarProvincias();
+          //});
 
-          provinciaSelect.addEventListener('change', () => {
-            activarMostrarDatos();
-            mostrarDistritos();
-          });
+          //provinciaSelect.addEventListener('change', () => {
+            //activarMostrarDatos();
+            //mostrarDistritos();
+          //});
 
-          distritoSelect.addEventListener('change', () => {
-            activarMostrarDatos();
-          });
+          //distritoSelect.addEventListener('change', () => {
+            //activarMostrarDatos();
+          //});
         </script>
 
         <div class="mb-3">
