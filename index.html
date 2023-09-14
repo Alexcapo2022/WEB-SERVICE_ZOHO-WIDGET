@@ -1,3 +1,4 @@
+<!-- GAAA -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -142,6 +143,7 @@
                 <label class="form-label" for="departamento">Seleccionar <br>Departamento</label>
                 <select id="departamento" style="margin-left: 10px;width: 180px;" name="departamento"
                   class="form-select form-select-sm">
+                  <option value="">Opciones</option>
                 </select>
 
               </div>
@@ -437,9 +439,9 @@
                 yoyi2.value = ProvLista[0];
                 yoyi2.textContent = ProvLista[1];
                 provinciaSelect.appendChild(yoyi2);
-                
 
 
+                departamentoSelect.innerHTML = `<option value="${DepaLista[0]}">${DepaLista[1]}</option>`;
                 provinciaSelect.innerHTML = `<option value="${prov.value}">${prov.value}</option>`;
                 distritoSelect.innerHTML = `<option value="${dist.value}">${dist.value}</option>`;
 
@@ -507,10 +509,56 @@
                 const id = document.getElementById('idInput').value;
                 const url = `https://serene-tundra-47257-a3e93549724c.herokuapp.com/api/zoho/update?id=${id}`;
 
+                // Validar que los campos no estén vacíos
+
+                const dniInput = document.getElementById("dni");
+                const dniValue = dniInput.value.trim();
+
+                const psInput = document.getElementById("codps");
+                const psValue = psInput.value.trim();
+
+                const apellidoInput2 = document.getElementById("apellido");
+                const apellidoValue = apellidoInput2.value.trim();
+
+                const nombreInput2 = document.getElementById("nombre");
+                const nombreValue = nombreInput2.value.trim();
+
+                const codul2Input = document.getElementById("codul");
+                const codulValue = codul2Input.value.trim();
+
+                if (!/^[a-zA-Z\s]+$/.test(nombreValue) || nombreValue === "" || nombreValue === null || nombreValue === undefined) {
+                  alert("El campo Nombre no debe contener caracteres numéricos ni especiales.");
+                  nombreInput.value = "";
+                  return;
+                }
+
+                if (!/^[a-zA-Z\s]+$/.test(apellidoValue) || apellidoValue === "" || apellidoValue === null || apellidoValue === undefined) {
+                  alert("El campo Apellido no puede estar vacío y no debe contener caracteres numéricos ni especiales.");
+                  return;
+                }
+
+                if (!/^\d*$/.test(dniValue) || dniValue.length > 11) {
+                  alert("El DNI ingresado es incorrecto. Por favor, ingrese un valor numérico de hasta 11 caracteres.");
+                  dniInput.value = "";
+                  return;
+                }
+
+                if (!/^\d*$/.test(psValue) || psValue.length > 11) {
+                  alert("El código PS ingresado es incorrecto. Por favor, ingrese un valor numérico de hasta 11 caracteres.");
+                  psInput.value = "";
+                  return;
+                }
+
+                if (codulValue.length > 8) {
+                  alert("El Código ULima ingresado es demasiado largo. Por favor, ingrese un valor de hasta 8 caracteres.");
+                  codul2Input.value = "";
+                  return;
+                }
+
 
 
                 // Obtener los valores de los campos del formulario
-               
+
                 const nombreInput = document.getElementById('nombre').value;
                 const apellidoInput = document.getElementById('apellido').value;
                 const emailInput = document.getElementById('email').value;
@@ -518,7 +566,6 @@
                 const favInput = document.getElementById('fav').value;
                 const doc = document.getElementById("doc").value;
                 const departamento = document.getElementById("departamento").value;
-
                 const provincia = document.getElementById("provincia").value;
                 const distrito = document.getElementById("distrito").value;
                 const dni = document.getElementById("dni").value;
@@ -526,17 +573,18 @@
                 const genero = document.getElementById("genero").value;
                 const domicilio = document.getElementById("domicilio").value;
                 const date = document.getElementById("date").value;
-                // const sl = document.getElementById("sl").value;
                 const lugarNacimiento = document.getElementById("lugarNacimiento").value;
 
-                //
-                const departamentoTEXT = data[departamento]["DEPARTAMENTO"];
-                const provinciaTEXT = data[departamento]["PROVINCIAS"][provincia]["PROVINCIA"];
-                const distritoTEXT = data[departamento]["PROVINCIAS"][provincia]["DISTRITOS"][distrito];
 
-                //TRAER HORA
+
+                // TRAER HORA
                 const fechaHora = new Date();
                 const hora = fechaHora.toLocaleTimeString('es-ES', { hour12: false });
+
+                // Aquí necesitas el código de conversión para departamento, provincia y distrito
+                const departamentoTEXT = departamento !== '' ? data[departamento]["DEPARTAMENTO"] : '';
+                const provinciaTEXT = provincia !== '' ? data[departamento]["PROVINCIAS"][provincia]["PROVINCIA"] : '';
+                const distritoTEXT = distrito !== '' ? data[departamento]["PROVINCIAS"][provincia]["DISTRITOS"][distrito] : '';
 
                 const requestBody = {
                   data: [
@@ -556,9 +604,8 @@
                       G_nero: genero,
                       Domicilio: domicilio,
                       Date_of_Birth: date,
-                      // Situaci_n_Laboral: sl,
                       Lugar_de_nacimiento: lugarNacimiento,
-                      Ubigeo: distrito,
+                      Ubigeo: distrito ? distrito : '',
                       Fecha_hora: hora,
                     }
                   ]
